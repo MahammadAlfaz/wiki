@@ -40,7 +40,7 @@ def reranking_node(state:WikiState)->WikiState:
             score=0.0
         print(f"Score: {score} | Source:{file_name} | {doc.page_content[:60]}...")
         
-        scored_docs.append(score,doc)
+        scored_docs.append((score,doc))
     scored_docs.sort(key=lambda x:x[0],reverse=True)
 
     top_docs=[doc for score ,doc in scored_docs[:3]]
