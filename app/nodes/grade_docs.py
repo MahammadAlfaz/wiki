@@ -47,7 +47,7 @@ def grade_docs_node(state:WikiState)->WikiState:
         result=llm.invoke(prompt)
         grade=result.content.strip().lower()
 
-        if 'relavant' in grade and 'irrelevant' not in grade :
+        if 'relevant' in grade and 'irrelevant' not in grade :
             relavant_docs.append(doc)
             sources.append(file_name)
             print(f'RELEVANT: {file_name} | {doc.page_content[:60]}...')

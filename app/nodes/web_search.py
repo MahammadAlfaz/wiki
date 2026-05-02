@@ -23,9 +23,9 @@ def web_search_node(state:WikiState)->WikiState:
         results=web_search_tool.invoke(question)
         web_docs=[
             Document(
-                page_content=results['content'],
+                page_content=result['content'],
                 metadata={
-                    'source':results['url'],
+                    'source':result['url'],
                     'type':'web_search',
                     'web_search':True
                 }
