@@ -1,9 +1,9 @@
-from app.core.llm import get_llm
+from app.core.llm import get_fast_llm
 from app.graph.state import WikiState
 
 
 def should_retrieve_node(state:WikiState)->WikiState:
-    llm=get_llm()
+    llm=get_fast_llm()
     question=state['transformed_query']
     prompt = f"""
     You are a router for a DevOps knowledge base.

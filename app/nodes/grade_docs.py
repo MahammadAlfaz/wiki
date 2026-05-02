@@ -1,9 +1,9 @@
-from app.core.llm import get_llm
+from app.core.llm import get_fast_llm
 from app.graph.state import WikiState
 
 
 def grade_docs_node(state:WikiState)->WikiState:
-    llm=get_llm()
+    llm=get_fast_llm()
     question=state['question']
     docs=state['retrieved_docs']
 
@@ -11,7 +11,7 @@ def grade_docs_node(state:WikiState)->WikiState:
         print('No docs to grade')
         return {
             "graded_docs":[],
-            "source":[]
+            "sources":[]
         }
     relavant_docs=[]
     sources=[]
@@ -47,7 +47,7 @@ def grade_docs_node(state:WikiState)->WikiState:
         result=llm.invoke(prompt)
         grade=result.content.strip().lower()
 
-        if 'relavant' in grade and 'irrelavant' not in grade :
+        if 'relavant' in grade and 'irrelevant' not in grade :
             relavant_docs.append(doc)
             sources.append(file_name)
             print(f'RELEVANT: {file_name} | {doc.page_content[:60]}...')
@@ -58,5 +58,5 @@ def grade_docs_node(state:WikiState)->WikiState:
     print(f"Sources: {sources}")
     return {
         "graded_docs" :relavant_docs,
-        'source':sources
+        'sources':sources
     }

@@ -7,7 +7,7 @@ def generate_answer_node(state:WikiState)->WikiState:
     question=state['question']
     docs=state['graded_docs']
     attempts=state['attempts']
-    sources=state['source']
+    sources=state['sources']
 
     if attempts >=3:
         return {
@@ -55,7 +55,7 @@ def generate_answer_node(state:WikiState)->WikiState:
     if "don't have enough information" in answer.lower():
         return {
             'generated_answer':answer,
-            'attempts':attempts,
+            'attempts':attempts+1,
             'final_answer':answer
         }
     return {

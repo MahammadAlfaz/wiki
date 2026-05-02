@@ -11,7 +11,7 @@ def get_llm(model: str = "gemini-2.5-flash"):
 
 def get_fast_llm():
     """
-    Lighter model for gradding/scoring nodes.
+    Lighter model for grading/scoring nodes.
     Faster and cheaper than full model
     """
     return ChatGoogleGenerativeAI(

@@ -5,7 +5,7 @@ from app.graph.state import WikiState
 def reranking_node(state:WikiState)->WikiState:
     llm=get_fast_llm()
     question=state['question']
-    docs=state['retrieved_docs']
+    docs=state['retrieved_docs'][:7]
 
     if not docs:
         print("No docs to rerank")

@@ -1,4 +1,4 @@
-from typing import Set
+
 
 from app.core.llm import get_fast_llm
 from app.graph.state import WikiState
@@ -41,7 +41,7 @@ def multi_query_retrieval_node(state:WikiState)->WikiState:
     print(f'Generated queries: {queries} ')
 
     retriever=get_retriever(k=3)
-    seen_content=Set()
+    seen_content=set()
     all_docs=[]
 
     for query in queries:
@@ -50,10 +50,10 @@ def multi_query_retrieval_node(state:WikiState)->WikiState:
             for doc in docs:
                 if doc.page_content not in seen_content:
                     seen_content.add(doc.page_content)
-                    all_docs.append(doc.page_content)
+                    all_docs.append(doc)
         except Exception as e:
             print(f"Retriveal error for query '{query}':'{e}'")
-    print(f"Total unique docs retrived: len(all_docs)")
+    print(f"Total unique docs retrived: {len(all_docs)}")
     return {
         'retrieved_docs':all_docs
     }

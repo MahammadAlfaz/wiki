@@ -30,20 +30,20 @@ def web_search_node(state:WikiState)->WikiState:
                     'web_search':True
                 }
             )
-            for results in results
-            if results.get('content')
+            for result in results
+            if result.get('content')
         ]
         print (f'web search returned {len(web_docs)} docs')
 
         return {
             'graded_docs':web_docs,
-            'web_search_tool':True,
+            'web_search_used':True,
             'sources':[r['url'] for r in results if r.get('url')]
         }
     except Exception as e:
         print (f"Web search failed:{e}")
         return {
             'graded_docs':[],
-            'web_search_tool':True,
-            'source':[]
+            'web_search_used':True,
+            'sources':[]
         }
