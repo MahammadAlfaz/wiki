@@ -71,6 +71,17 @@ def build_rag_graph():
     )
 
     graph.add_conditional_edges(
+        'grade_docs',
+        docs_router,
+        {
+            "web_search":"web_search",
+            "generate":"generate_answer"
+        }
+    )
+
+
+
+    graph.add_conditional_edges(
         "hallucination_grader",
         hallucination_router,{
             "good":END,
