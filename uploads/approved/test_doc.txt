@@ -1,0 +1,17 @@
+
+        Project X — Kubernetes Setup POC
+
+        We deployed a GKE cluster on GCP for client XYZ.
+        
+        Architecture:
+        - 3 node pools: frontend, backend, database
+        - Autopilot mode disabled for custom configuration
+        - Node pool machine type: e2-standard-4
+        
+        Issues faced:
+        - Pod scheduling issues due to resource limits
+        - Fixed by adjusting CPU and memory requests
+        
+        Commands used:
+        gcloud container clusters create project-x-cluster             --zone us-central1-a             --num-nodes 3             --machine-type e2-standard-4
+        
