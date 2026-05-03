@@ -6,6 +6,7 @@ def init_db():
     Creates all tables in the database,
     Safe to run multiple times - uses CREATE TABLE IF NOT EXISTS
     """
+    from app.models import user,document,query_log
     Base.metadata.create_all(bind=engine)
     print("Tables created successfully")
 
