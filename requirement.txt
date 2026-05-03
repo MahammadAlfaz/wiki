@@ -25,3 +25,6 @@ tavily-python
 google-search-results
 pyMuPDF
 docx2txt
+pydantic[email]
+python-multipart
+bcrypt==4.0.1
