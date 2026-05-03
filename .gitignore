@@ -5,3 +5,4 @@ chroma_db/
 *.pyc
 credentials.json
 token.json
+uploads/
