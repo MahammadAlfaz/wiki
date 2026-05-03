@@ -15,12 +15,12 @@ def get_retriever(k:int=5):
     k=number of docs to retrieve per  query 
     """
     vector_db=Chroma(
-        persist_directory=CHROMA_PATH,
+         persist_directory=CHROMA_PATH,
         embedding_function=GoogleGenerativeAIEmbeddings(
-            model='models/embedding-001',
+            model='gemini-embedding-001',
             google_api_key=settings.GOOGLE_API_KEY
-        ),  
-        collection_name='wiki_docs'
+        ),
+        collection_name="wiki_docs"
     )
     return vector_db.as_retriever(search_kwargs={'k':k})
 
@@ -29,7 +29,7 @@ def get_vector_store():
     return Chroma(
         persist_directory=CHROMA_PATH,
         embedding_function=GoogleGenerativeAIEmbeddings(
-            model='models/embedding-001',
+            model='gemini-embedding-001',
             google_api_key=settings.GOOGLE_API_KEY
         ),
         collection_name="wiki_docs"

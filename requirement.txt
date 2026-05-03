@@ -23,3 +23,5 @@ passlib[bcrypt]
 pydantic-settings
 tavily-python
 google-search-results
+pyMuPDF
+docx2txt
