@@ -1,5 +1,4 @@
 
-
 fastapi
 uvicorn
 python-dotenv
@@ -22,3 +21,5 @@ sqlalchemy
 python-jose[cryptography]
 passlib[bcrypt]
 pydantic-settings
+tavily-python
+google-search-results
