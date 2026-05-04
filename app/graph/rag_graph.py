@@ -30,12 +30,14 @@ def hallucination_router(state:WikiState)->str:
     score=state['hallucination_score']
     attempts=state.get('attempts',0)
     answer=state.get('generated_answer',"")
+    graded_docs=state.get('graded_docs',[])
 
+    if not graded_docs:
+        return 'good'
     if attempts>=3:
         return "give_up"
     if float(score) >=0.7:
         return "good"
-    
     if "don't have enough information" in answer.lower():
         return "web_search"
     

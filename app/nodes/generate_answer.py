@@ -8,18 +8,27 @@ def generate_answer_node(state:WikiState)->WikiState:
     docs=state['graded_docs']
     attempts=state['attempts']
     sources=state['sources']
+    should_retrieve=state['should_retrieve']
 
     if attempts >=3:
         return {
-            'generated_answer':'I dont have enough information to answer this accurately. Please check with the admin for the answer',
+            'generated_answer':"I don't have enough information to answer this accurately. Please check with the admin for the answer",
             'attempts':attempts,
-            'final_answer':"I dont have enough information to answer this accurately. Please check with the admin for the answer"
+            'final_answer':"I don't have enough information to answer this accurately. Please check with the admin for the answer"
+        }
+    if not should_retrieve:
+        results=llm.invoke(question)
+        answer=results.content.strip()
+        return {
+            'generated_answer':answer,
+            'attempts':attempts+1,
+            'final_answer':answer
         }
     if not docs:
         return{
-            'generated_answer':"I don't have emough information to answer this accurately",
-            'attempts':attempts,
-            'final_answer':"I don't have emough information to answer this accurately"
+            'generated_answer':"I don't have enough information to answer this accurately",
+            'attempts':attempts+1,
+            'final_answer':"I don't have enough information to answer this accurately"
         }
     context = "\n\n".join([
         f"Source — {docs[i].metadata.get('source', 'unknown').split('/')[-1]}:\n{docs[i].page_content}"
