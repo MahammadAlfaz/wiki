@@ -73,13 +73,19 @@ def approve_document(
     if doc.status != DocumentStatus.pending:
         raise HTTPException(status_code=400, detail=f"Document is already {doc.status}")
     os.makedirs(APPROVED_DIR, exist_ok=True)
-    new_path = os.path.join(APPROVED_DIR, doc.file_name)
-    shutil.move(doc.file_path, new_path)
+    
+    
 
     try:
-        chunk_count = ingest_document(new_path).get("chunk_count", 0)
+        result = ingest_document(
+            document_id=str(doc.id),
+            file_name=doc.file_name,
+            uploaded_by=str(doc.uploaded_by)
+        )
+        chunk_count=result.get("chunk_count",0)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
+    new_path = os.path.join(APPROVED_DIR, doc.file_name)
     doc.status = DocumentStatus.approved
     doc.file_path = new_path
     doc.reviewed_by = admin.id
